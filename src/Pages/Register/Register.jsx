@@ -1,13 +1,29 @@
-import React, { useState } from "react";
-import { Button, Form, Input, Radio } from "antd";
+import React, { useEffect, useState } from "react";
+import { Button, Form, Input, message, Radio } from "antd";
 import { Link } from "react-router-dom";
 import HospitalRegister from "./HospitalRegister";
+import { RegisterUser } from "../../ApiCalls/ApiCalls";
 const Register = () => {
   const [type, setType] = useState("donor");
 
-  const onFinish = (values) => {
-    console.log(values);
+  const onFinish = async(values) => {
+    try{
+      const response = await RegisterUser({...values,userType:type});
+      if(response.status){
+        message.success(response.message)
+      }else{
+        throw new Error(response.message)
+      }
+    }catch(error){
+         message.error(error.message)
+    }
   };
+
+  useEffect(()=>{
+    if(localStorage.getItem("token")){
+     navigate('/')
+    }
+    },[])
   return (
     <div className="flex justify-center items-center h-screen bg-primary">
       <Form layout="vertical w-full flex justify-center"

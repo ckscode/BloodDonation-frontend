@@ -1,12 +1,31 @@
-import React, { useState } from 'react';
-import { Button, Form, Input, Radio } from "antd";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import { Button, Form, Input, message, Radio } from "antd";
+import { Link, useNavigate } from "react-router-dom";
+import { LoginUser } from '../../ApiCalls/ApiCalls';
 
 const Login = () => {
+  const navigate = useNavigate();
     const [type, setType] = useState("donor");
-    const onFinish = (values) => {
-        console.log(values);
+    const onFinish = async(values) => {
+      try{
+        const response = await LoginUser(values);
+        if(response.status){
+          message.success(response.message);
+          localStorage.setItem("token",response.data);
+          navigate('/')
+        }else{
+          throw new Error(response.message)
+        }
+      }catch(error){
+           message.error(error.message)
+      }
       };
+
+useEffect(()=>{
+if(localStorage.getItem("token")){
+ navigate('/')
+}
+},[])
 
     return (
         <div className="flex justify-center items-center h-screen bg-primary">
@@ -14,7 +33,7 @@ const Login = () => {
         onFinish={onFinish}>
           <div className="bg-white shadow-md rounded-md p-5 w-1/4">
             <h1 className="text-4xl text-primary mb-0 heading">{type}</h1>
-            <h2 className="text-gray-900 mb-2">Register</h2>
+            <h2 className="text-gray-900 mb-2">Login</h2>
             <Radio.Group
               className="mb-3"
               value={type}
