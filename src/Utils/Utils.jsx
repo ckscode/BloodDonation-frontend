@@ -7,3 +7,13 @@ export const getCurrentUsername = (user) =>{
         return user.organisationName
     }
 }
+
+
+// export const getAntdValidation = () =>{
+//     return [
+//         {
+//             required:true,
+//             message:'Required'
+//         },
+//     ];
+// };

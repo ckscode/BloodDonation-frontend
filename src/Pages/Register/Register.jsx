@@ -1,21 +1,29 @@
 import React, { useEffect, useState } from "react";
 import { Button, Form, Input, message, Radio } from "antd";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import HospitalRegister from "./HospitalRegister";
 import { RegisterUser } from "../../ApiCalls/ApiCalls";
+import { useDispatch } from "react-redux";
+import { setLoading } from "../../Redux/loaderSlice";
 const Register = () => {
   const [type, setType] = useState("donor");
-
+  const dispatch = useDispatch();
+  const navigate = useNavigate()
   const onFinish = async(values) => {
     try{
+      dispatch(setLoading(true));
       const response = await RegisterUser({...values,userType:type});
       if(response.status){
         message.success(response.message)
+        dispatch(setLoading(false));
+        navigate('/login')
       }else{
+        dispatch(setLoading(false));
         throw new Error(response.message)
       }
     }catch(error){
          message.error(error.message)
+         dispatch(setLoading(false));
     }
   };
 

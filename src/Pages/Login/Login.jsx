@@ -2,21 +2,28 @@ import React, { useEffect, useState } from 'react';
 import { Button, Form, Input, message, Radio } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import { LoginUser } from '../../ApiCalls/ApiCalls';
+import { useDispatch } from 'react-redux';
+import { setLoading } from '../../Redux/loaderSlice';
 
 const Login = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
     const [type, setType] = useState("donor");
     const onFinish = async(values) => {
       try{
+        dispatch(setLoading(true));
         const response = await LoginUser(values);
         if(response.status){
           message.success(response.message);
           localStorage.setItem("token",response.data);
+          dispatch(setLoading(false));
           navigate('/')
         }else{
+          dispatch(setLoading(false));
           throw new Error(response.message)
         }
       }catch(error){
+         dispatch(setLoading(false));
            message.error(error.message)
       }
       };
