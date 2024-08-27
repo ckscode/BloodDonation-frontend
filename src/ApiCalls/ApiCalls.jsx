@@ -1,9 +1,10 @@
 import axios from 'axios';
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 export const RegisterUser = async(data)=>{
     try{
-        const response =await axios.post('http://localhost:5000/api/register',data).then(res=>res.data).catch(error=>error.message)
-        console.log(response)
+        const response =await axios.post(`${API_URL}/api/user/register`,data).then(res=>res.data).catch(error=>error.message);
           return response;
     }catch(error){
           return error
@@ -13,11 +14,11 @@ export const RegisterUser = async(data)=>{
 
 export const LoginUser = async(data)=>{
     try{
-        const response =await axios.post('http://localhost:5000/api/login',data,
+        const response =await axios.post(`${API_URL}/api/user/login`,data,
             {headers:{
                 authorization: `Bearer ${localStorage.getItem("token")}`
             }}).then(res=>res.data).catch(error=>error.message)
-        console.log(response)
+      
           return response;
     }catch(error){
           return error
@@ -28,7 +29,7 @@ export const LoginUser = async(data)=>{
 
 export const getCurrentUser = async() =>{
     try{
-        const response =await axios.get('http://localhost:5000/api/get-current-user', {headers:{
+        const response =await axios.get(`${API_URL}/api/user/get-current-user`, {headers:{
             authorization: `Bearer ${localStorage.getItem("token")}`
         }}).then(res=>res.data).catch(error=>error.message)
           return response;

@@ -40,6 +40,13 @@ const ProtectedPages = ({ children }) => {
     }
   }, []);
 
+const logout = () =>{
+  if (localStorage.getItem("token")) {
+    localStorage.removeItem('token')
+    navigate("/login");
+  }
+}
+
   return (
     currentUser && (
       <div>
@@ -52,12 +59,12 @@ const ProtectedPages = ({ children }) => {
         </div>
         <h1>{currentUser.userType}</h1>
         <div className="flex justify-between">
-        <p className="text-lg me-6"><UserOutlined className="text-xl"/> {getCurrentUsername(currentUser)}</p> 
-        <LogoutOutlined className="ms-6 text-2xl cursor-pointer"/>
+        <p onClick={()=>navigate('/profile')} className="text-lg me-6 cursor-pointer"><UserOutlined className="text-xl"/> {getCurrentUsername(currentUser)}</p> 
+        <LogoutOutlined onClick={logout} className="ms-6 text-2xl cursor-pointer"/>
         </div>
        
         </div>
-        <div className="p-5">{children}</div>
+        <div className="p-5 pt-24">{children}</div>
         
       </div>
     )

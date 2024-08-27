@@ -7,6 +7,7 @@ import ProtectedPages from './Components/ProtectedPages'
 import {  Flex, Spin } from 'antd';
 import Loader from './Components/Loader/Loader'
 import { useSelector } from 'react-redux'
+import Profile from './Pages/Profile/Profile'
 
 function App() {
   const {loading} = useSelector((state)=>state.loader);
@@ -19,6 +20,11 @@ return (
   <Route path="/" element={
     <ProtectedPages>
     <Home/>
+    </ProtectedPages>
+    }/>
+  <Route path="/profile" element={
+    <ProtectedPages>
+    <Profile/>
     </ProtectedPages>
     }/>
   <Route path="/login" element={<Login/>}/>

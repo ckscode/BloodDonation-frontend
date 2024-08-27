@@ -7,7 +7,7 @@ const Home = () => {
 
     return (
         <div className='h-screen '>
-            <h1 className='pt-20'>{currentUser.email}</h1>
+            <h1 className=''>{currentUser.email}</h1>
         </div>
     );
 };
