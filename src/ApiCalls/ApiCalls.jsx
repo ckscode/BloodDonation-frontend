@@ -37,3 +37,49 @@ export const getCurrentUser = async() =>{
           return error
     }
 }
+
+
+export const getAllDonorOfOrg = async() =>{
+    try{
+        const response =await axios.get(`${API_URL}/api/user/get-all-donors`, {headers:{
+            authorization: `Bearer ${localStorage.getItem("token")}`
+        }}).then(res=>res.data).catch(error=>error.message)
+          return response;
+    }catch(error){
+          return error
+    }
+}
+
+export const getAllHospitalsOfOrg = async() =>{
+    try{
+        const response =await axios.get(`${API_URL}/api/user/get-all-hospitals`, {headers:{
+            authorization: `Bearer ${localStorage.getItem("token")}`
+        }}).then(res=>res.data).catch(error=>error.message)
+          return response;
+    }catch(error){
+          return error
+    }
+}
+
+export const getAllOrgForDonor = async() =>{
+    try{
+        const response =await axios.get(`${API_URL}/api/user/get-all-organisations`, {headers:{
+            authorization: `Bearer ${localStorage.getItem("token")}`
+        }}).then(res=>res.data).catch(error=>error.message)
+          return response;
+    }catch(error){
+          return error
+    }
+}
+
+
+export const getAllOrgForHos = async() =>{
+    try{
+        const response =await axios.get(`${API_URL}/api/user/get-all-organisations-for-hopsitals`, {headers:{
+            authorization: `Bearer ${localStorage.getItem("token")}`
+        }}).then(res=>res.data).catch(error=>error.message)
+          return response;
+    }catch(error){
+          return error
+    }
+}

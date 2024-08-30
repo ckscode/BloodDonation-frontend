@@ -1,13 +1,12 @@
-import { Button, message, Table } from "antd";
-import React, { useEffect, useState } from "react";
-import InventoryForm from "./InventoryForm";
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from "react-redux";
-import { setLoading } from "../../../Redux/loaderSlice";
-import { getInventory } from "./inventoryApi";
-import { getDateFormat } from "../../../utils/Utils";
+import { getInventoryWithFilters } from '../Pages/Profile/Inventory/inventoryApi';
+import { Button, message, Table } from "antd";
+import { setLoading } from '../Redux/loaderSlice';
+import { getDateFormat } from '../utils/Utils';
 
-const Inventory = () => {
-  const [open, setOpen] = useState(false);
+const InventoryTable = ({filters}) => {
+    const [open, setOpen] = useState(false);
   const [data, setData] = useState([]);
   const dispatch = useDispatch();
 
@@ -34,13 +33,7 @@ const Inventory = () => {
       title: "Reference",
       dataIndex: "reference",
       key: "reference",
-     render:(text,record)=>{
-        if(record.inventoryType === "in"){
-            return record.donor.name
-        }else{
-            return record.hospital.hospitalName
-        }
-     }
+     render:(text,record)=>record.organisation.organisationName
     },
     {
       title: "Date",
@@ -53,8 +46,7 @@ const Inventory = () => {
   const getData = async () => {
     try {
       dispatch(setLoading(true));
-      const response = await getInventory();
-      console.log(response)
+      const response = await getInventoryWithFilters({filters});
       dispatch(setLoading(false));
       if (response.status) {
         setData(response.data);
@@ -70,19 +62,11 @@ const Inventory = () => {
   useEffect(()=>{
         getData()
   },[])
-  return (
-    <div>
-      <div className="flex justify-end">
-        <Button type="primary" onClick={() => setOpen(true)}>
-          Add Inventory
-        </Button>
-      </div>
-      <div>
-        <Table style={{marginTop:'1%'}} dataSource={data.map((item)=>({...item,key:item._id}))} columns={columns} />;
-      </div>
-      <InventoryForm open={open} setOpen={setOpen} reloadData={getData}/>
-    </div>
-  );
+    return (
+        <div>
+             <Table style={{marginTop:'1%'}} dataSource={data.map((item)=>({...item,key:item._id}))} columns={columns} />;
+        </div>
+    );
 };
 
-export default Inventory;
+export default InventoryTable;

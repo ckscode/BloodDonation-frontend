@@ -1,20 +1,22 @@
 import { Form, Input, message, Modal, Radio } from 'antd';
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { setLoading } from '../../../Redux/loaderSlice';
 import { addInventory } from './inventoryApi';
 
 const InventoryForm = ({open,setOpen,reloadData}) => {
     const [inventoryType,setInventoryType] = useState('in');
+    const { currentUser } = useSelector((state) => state.users);
     const [form] = Form.useForm();
     const dispatch = useDispatch()
     const onFinish = async(values) =>{
       try{
          dispatch(setLoading(true))
-         const response= await addInventory({...values,inventoryType});
+         const response= await addInventory({...values,inventoryType,organisation:currentUser});
          dispatch(setLoading(false))
          if(response.status){
             message.success('Inventory Added Successfully')
+            reloadData();
            setOpen(false)
          }else{
             dispatch(setLoading(false))
@@ -22,10 +24,11 @@ const InventoryForm = ({open,setOpen,reloadData}) => {
          }
         
       }catch(error){
-            message.error(error);
+            message.error(error.message);
             dispatch(setLoading(false))
       }
     } 
+
     return (
         <Modal
         title="Add Inventory" 
@@ -33,6 +36,7 @@ const InventoryForm = ({open,setOpen,reloadData}) => {
         onCancel={()=>setOpen(false)}
         onOk={()=>{
             form.submit();
+            
         }}
         centered>
             <Form

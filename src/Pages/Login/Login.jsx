@@ -12,7 +12,7 @@ const Login = () => {
     const onFinish = async(values) => {
       try{
         dispatch(setLoading(true));
-        const response = await LoginUser(values);
+        const response = await LoginUser({...values,type});
         if(response.status){
           message.success(response.message);
           localStorage.setItem("token",response.data);

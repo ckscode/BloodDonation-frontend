@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getCurrentUser } from "../ApiCalls/ApiCalls";
-import { message } from "antd";
+import { App,message } from "antd";
 import { useNavigate } from "react-router-dom";
 import { getCurrentUsername } from "../utils/Utils";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,7 +14,7 @@ const ProtectedPages = ({ children }) => {
   const { loading } = useSelector((state) => state.loader);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const getUser = async () => {
+  const getUser = async() => {
     try {
       dispatch(setLoading(true));
       const response = await getCurrentUser();
@@ -49,6 +49,7 @@ const logout = () =>{
 
   return (
     currentUser && (
+      <App>
       <div>
         <div className="flex justify-between items-center bg-primary text-white p-9 h-3 shadow-lg absolute top-0 right-0 left-0">
         <div className="w-60 flex">
@@ -67,6 +68,7 @@ const logout = () =>{
         <div className="p-5 pt-24">{children}</div>
         
       </div>
+      </App>
     )
   );
 };

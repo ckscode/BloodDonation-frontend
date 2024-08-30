@@ -8,6 +8,8 @@ import {  Flex, Spin } from 'antd';
 import Loader from './Components/Loader/Loader'
 import { useSelector } from 'react-redux'
 import Profile from './Pages/Profile/Profile'
+import Donors from './Pages/Profile/Donor/Donors'
+
 
 function App() {
   const {loading} = useSelector((state)=>state.loader);
@@ -16,6 +18,7 @@ function App() {
 return (
   <> {loading&&<Loader/>}
   <BrowserRouter>
+
 <Routes>
   <Route path="/" element={
     <ProtectedPages>
@@ -27,9 +30,11 @@ return (
     <Profile/>
     </ProtectedPages>
     }/>
+ 
   <Route path="/login" element={<Login/>}/>
   <Route path="/register" element={<Register/>}/>
 </Routes>
+
 </BrowserRouter></>
 
   )
