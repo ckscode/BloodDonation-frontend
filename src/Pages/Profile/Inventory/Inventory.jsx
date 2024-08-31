@@ -54,7 +54,6 @@ const Inventory = () => {
     try {
       dispatch(setLoading(true));
       const response = await getInventory();
-      console.log(response)
       dispatch(setLoading(false));
       if (response.status) {
         setData(response.data);
@@ -80,7 +79,7 @@ const Inventory = () => {
       <div>
         <Table style={{marginTop:'1%'}} dataSource={data.map((item)=>({...item,key:item._id}))} columns={columns} />;
       </div>
-      <InventoryForm open={open} setOpen={setOpen} reloadData={getData}/>
+      <InventoryForm open={open} setOpen={setOpen} reloadData={getData} />
     </div>
   );
 };

@@ -63,6 +63,10 @@ const Organisations = ({ userType }) => {
     },
   ];
 
+  useEffect(() => {
+    getData();
+  }, []);
+
   const getData = async () => {
     try {
       dispatch(setLoading(true));
@@ -82,9 +86,7 @@ const Organisations = ({ userType }) => {
     }
   };
 
-  useEffect(() => {
-    getData();
-  }, []);
+ 
 
   return (
     <div >

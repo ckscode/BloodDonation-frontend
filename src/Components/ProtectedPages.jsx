@@ -53,7 +53,7 @@ const logout = () =>{
       <div>
         <div className="flex justify-between items-center bg-primary text-white p-9 h-3 shadow-lg absolute top-0 right-0 left-0">
         <div className="w-60 flex">
-          <div className="text-center">
+          <div className="text-center cursor-pointer" onClick={()=>navigate('/')}>
           <img className="w-32 m-0" src={logo} alt='image'/>
           <p className="-mt-3 text-lg">Blood Donation</p>
           </div>

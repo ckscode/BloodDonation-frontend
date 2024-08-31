@@ -1,6 +1,6 @@
 import { Tabs } from 'antd';
 import TabPane from 'antd/es/tabs/TabPane';
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import Inventory from './Inventory/Inventory';
 import Donors from './Donor/Donors';
@@ -11,21 +11,22 @@ import InventoryTable from '../../Components/InventoryTable';
 
 const Profile = () => {
     const {currentUser} = useSelector((state)=>state.users);
+
      const items = [
         {
             key:'1',
             label:'Inventory',
-            children:<Inventory/>
+            children:<Inventory />
         },   
         {
             key:'2',
             label:'Donors',
-            children:<Donors/>
+            children:<Donors />,
         },
         {
             key:'3',
             label:'Hospitals',
-            children:<Hospitals/>
+            children:<Hospitals />,
         }
      ]
     

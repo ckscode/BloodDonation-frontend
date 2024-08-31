@@ -4,11 +4,10 @@ import Home from './Pages/Home/Home'
 import Login from './Pages/Login/Login'
 import Register from './Pages/Register/Register'
 import ProtectedPages from './Components/ProtectedPages'
-import {  Flex, Spin } from 'antd';
 import Loader from './Components/Loader/Loader'
 import { useSelector } from 'react-redux'
 import Profile from './Pages/Profile/Profile'
-import Donors from './Pages/Profile/Donor/Donors'
+
 
 
 function App() {

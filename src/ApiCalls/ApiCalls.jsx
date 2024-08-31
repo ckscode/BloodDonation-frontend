@@ -83,3 +83,14 @@ export const getAllOrgForHos = async() =>{
           return error
     }
 }
+
+export const getHomeInventory = async() =>{
+    try{
+        const response =await axios.get(`${API_URL}/api//dashboard/blood-groups-data`, {headers:{
+            authorization: `Bearer ${localStorage.getItem("token")}`
+        }}).then(res=>res.data).catch(error=>error.message)
+          return response;
+    }catch(error){
+          return error
+    }
+}

@@ -8,7 +8,6 @@ import { getDateFormat } from '../../../utils/Utils';
 const Hospitals = () => {
     const [data, setData] = useState([]);
     const dispatch = useDispatch();
-
     const columns = [
         {
           title: "Hospital Name",
@@ -41,12 +40,14 @@ const Hospitals = () => {
           render:(text)=>getDateFormat(text)
         },
       ];
+      useEffect(()=>{
+        getData()
+  },[])
 
     const getData = async () => {
         try {
           dispatch(setLoading(true));
           const response = await getAllHospitalsOfOrg();
-          console.log(response)
           dispatch(setLoading(false));
           if (response.status) {
             setData(response.data);
@@ -59,9 +60,7 @@ const Hospitals = () => {
         }
       };
     
-      useEffect(()=>{
-            getData()
-      },[])
+     
 
     return (
         <div>
