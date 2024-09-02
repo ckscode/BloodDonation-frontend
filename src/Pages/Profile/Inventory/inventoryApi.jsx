@@ -26,9 +26,9 @@ export const getInventory = async() =>{
 }
 
 
-export const getInventoryWithFilters = async(data) =>{
+export const getInventoryWithFilters = async({filters,limit}) =>{
     try{
-        const response = await axios.post(`${API_URL}/api/inventory/getWithFilters`,data, {headers:{
+        const response = await axios.post(`${API_URL}/api/inventory/getWithFilters`,{filters,limit}, {headers:{
             authorization: `Bearer ${localStorage.getItem("token")}`
         }}).then(res=>res.data).catch(error=>error.message)
           return response;

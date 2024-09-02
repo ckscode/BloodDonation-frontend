@@ -44,7 +44,7 @@ const Inventory = () => {
     },
     {
       title: "Date",
-      dataIndex: "date",
+      dataIndex: "createdAt",
       key: "date",
       render:(text)=>getDateFormat(text)
     },

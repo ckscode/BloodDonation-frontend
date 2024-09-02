@@ -4,18 +4,22 @@ import {  getHomeInventory } from '../../ApiCalls/ApiCalls';
 import { message } from 'antd';
 import { setLoading } from '../../Redux/loaderSlice';
 import { getCurrentUsername } from '../../utils/Utils';
+import InventoryTable from '../../Components/InventoryTable';
 
 
 const Home = () => {
     const {currentUser} = useSelector((state)=>state.users);
     const [bloodGroupData,setBloodGroupData] = useState()
      const dispatch = useDispatch();
-  
+     const [id,setId] = useState();
+     useEffect(()=>{
+    getData()
+   },[])
+   
     const getData = async () => {
         try {
           dispatch(setLoading(true));
           const response = await getHomeInventory();
-         
           dispatch(setLoading(false));
           if (response.status) {
             setBloodGroupData(response.data);
@@ -28,13 +32,27 @@ const Home = () => {
         }
       };
 
-useEffect(()=>{
-   getData()
-},[])
+
 
     return (
         <div className='h-screen '>
-            <div className='w-full mt-3 flex justify-evenly grid grid-cols-4 gap-5'>
+           {currentUser&&currentUser.userType === 'donor'&&
+          <>
+          <div className='w-full mt-3 flex justify-evenly grid grid-cols-4 gap-5'>
+          
+            </div>
+
+            <h2 className='mt-4'>Your Recent Donations</h2>
+            <InventoryTable
+            filters={{
+                donor:currentUser._id
+            }}
+            limit={5}
+            pagination={false}
+            /></>}
+          {currentUser&&currentUser.userType === 'organisation'&&
+          <>
+          <div className='w-full mt-3 flex justify-evenly grid grid-cols-4 gap-5'>
             {bloodGroupData&&bloodGroupData.map((ele,index)=>{
                 return(
                <div key={index} className='bg-red-300 text-primary rounded-lg p-4 flex justify-between items-center shadow-md'>
@@ -48,6 +66,29 @@ useEffect(()=>{
                 )
             })}
             </div>
+
+            <h2 className='mt-4'>Your Recent Inventories</h2>
+            <InventoryTable
+            filters={{
+                organisation:currentUser._id
+            }}
+            limit={5}
+            pagination={false}
+            /></>}
+                 {currentUser&&currentUser.userType === 'hospital'&&
+          <>
+          <div className='w-full mt-3 flex justify-evenly grid grid-cols-4 gap-5'>
+          
+            </div>
+
+            <h2 className='mt-4'>Your Recent Consumptions</h2>
+            <InventoryTable
+            filters={{
+                hospital:currentUser._id
+            }}
+            limit={5}
+            pagination={false}
+            /></>}
         </div>
     );
 };

@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getInventoryWithFilters } from '../Pages/Profile/Inventory/inventoryApi';
 import { Button, message, Table } from "antd";
 import { setLoading } from '../Redux/loaderSlice';
 import { getDateFormat } from '../utils/Utils';
 
-const InventoryTable = ({filters}) => {
+const InventoryTable = ({filters,limit,pagination,userType}) => {
     const [open, setOpen] = useState(false);
   const [data, setData] = useState([]);
   const dispatch = useDispatch();
-
+  const {currentUser} = useSelector((state)=> state.users)
 
   const columns = [
     {
@@ -33,20 +33,36 @@ const InventoryTable = ({filters}) => {
       title: "Reference",
       dataIndex: "reference",
       key: "reference",
-     render:(text,record)=>record.organisation.organisationName
+     render:(text,record)=>{
+      if(currentUser.userType !== 'organisation'){
+        return record.organisation.organisationName}
+      else{
+        if(record.inventoryType==='out'){
+          return record.hospital.hospitalName
+        }else{
+          return record.donor.name
+        }
+      }
+      }
     },
     {
       title: "Date",
-      dataIndex: "date",
+      dataIndex: "createdAt",
       key: "date",
       render:(text)=>getDateFormat(text)
     },
   ];
 
+  if(currentUser.userType!=='organisation'){
+        columns.splice(0,1)
+        columns[2].title='Organisation Name'
+         columns[3].title=currentUser.userType ==='hospital'?'Taken On':'Donated At'
+  }
+
   const getData = async () => {
     try {
       dispatch(setLoading(true));
-      const response = await getInventoryWithFilters({filters});
+      const response = await getInventoryWithFilters({filters,limit});
       dispatch(setLoading(false));
       if (response.status) {
         setData(response.data);
@@ -60,11 +76,11 @@ const InventoryTable = ({filters}) => {
   };
 
   useEffect(()=>{
-        getData()
-  },[])
+    getData()
+},[currentUser])
     return (
         <div>
-             <Table style={{marginTop:'1%'}} dataSource={data.map((item)=>({...item,key:item._id}))} columns={columns} />;
+             <Table style={{marginTop:'1%'}} dataSource={data.map((item)=>({...item,key:item._id}))} columns={columns} pagination={pagination?true:false}/>;
         </div>
     );
 };

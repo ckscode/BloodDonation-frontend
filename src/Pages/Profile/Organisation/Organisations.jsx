@@ -19,7 +19,7 @@ const Organisations = ({ userType }) => {
 
   const columns = [
     {
-      title: "Organisation Name",
+      title: "Name",
       dataIndex: "organisationName",
       key: "organisationName",
       render: (text) => text,
@@ -43,7 +43,7 @@ const Organisations = ({ userType }) => {
       render: (text) => text,
     },
     {
-      title: "createdAt",
+      title: "created At",
       dataIndex: "createdAt",
       key: "createdAt",
       render: (text) => getDateFormat(text),

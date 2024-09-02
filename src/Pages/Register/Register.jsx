@@ -33,7 +33,7 @@ const Register = () => {
     }
     },[])
   return (
-    <div className="flex justify-center items-center h-screen bg-primary">
+    <div className="flex justify-center items-center h-screen">
       <Form layout="vertical w-full flex justify-center"
       onFinish={onFinish}>
         <div className="bg-white shadow-md rounded-md p-5 w-1/4">
