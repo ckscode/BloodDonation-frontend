@@ -8,10 +8,11 @@ import Hospitals from './Hospital/Hospitals';
 import Organisations from './Organisation/Organisations';
 import Donations from './Donation/Donations';
 import InventoryTable from '../../Components/InventoryTable';
+import useLogin from '../../ApiCalls/useLogin';
 
 const Profile = () => {
     const {currentUser} = useSelector((state)=>state.users);
-
+    useLogin()
      const items = [
         {
             key:'1',

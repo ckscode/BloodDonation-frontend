@@ -8,6 +8,7 @@ import { setCurrentUser } from "../Redux/userSlice";
 import { setLoading } from "../Redux/loaderSlice";
 import logo from '../../src/Assets/saka-02.png'
 import { LogoutOutlined, UserOutlined } from "@ant-design/icons";
+import { jwtDecode } from "jwt-decode";
 
 const ProtectedPages = ({ children }) => {
   const { currentUser } = useSelector((state) => state.users);
@@ -17,22 +18,32 @@ const ProtectedPages = ({ children }) => {
   const getUser = async() => {
     try {
       dispatch(setLoading(true));
-      const response = await getCurrentUser();
-      if (response.status) {
-        message.success(response.message);
-        dispatch(setCurrentUser(response.data));
+      const decode = jwtDecode(localStorage.getItem('token'));
+      const currentEpoch = Math.floor(Date.now() / 1000);
+      if(currentEpoch<decode.exp){
+        const response = await getCurrentUser();
+        if (response.status) {
+          message.success(response.message);
+          dispatch(setCurrentUser(response.data));
+          dispatch(setLoading(false));
+        } else {
+          dispatch(setLoading(false));
+          throw new Error(response);
+        }
+      }else{
         dispatch(setLoading(false));
-      } else {
-        dispatch(setLoading(false));
-        throw new Error(response);
+        logout()
       }
+    
     } catch (error) {
       dispatch(setLoading(false));
       message.error(error.message);
+      logout()
     }
   };
 
   useEffect(() => {
+   
     if (localStorage.getItem("token")) {
       getUser();
     } else {

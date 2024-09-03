@@ -5,13 +5,16 @@ import { message } from 'antd';
 import { setLoading } from '../../Redux/loaderSlice';
 import { getCurrentUsername } from '../../utils/Utils';
 import InventoryTable from '../../Components/InventoryTable';
+import useLogin from '../../ApiCalls/useLogin';
 
 
 const Home = () => {
+  useLogin()
     const {currentUser} = useSelector((state)=>state.users);
     const [bloodGroupData,setBloodGroupData] = useState()
      const dispatch = useDispatch();
      const [id,setId] = useState();
+
      useEffect(()=>{
     getData()
    },[])

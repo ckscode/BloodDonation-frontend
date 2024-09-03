@@ -6,6 +6,7 @@ import { setLoading } from "../../../Redux/loaderSlice";
 import { getInventory } from "./inventoryApi";
 import { getDateFormat } from "../../../utils/Utils";
 
+
 const Inventory = () => {
   const [open, setOpen] = useState(false);
   const [data, setData] = useState([]);
