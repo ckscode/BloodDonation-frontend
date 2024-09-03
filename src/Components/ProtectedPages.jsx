@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getCurrentUser } from "../ApiCalls/ApiCalls";
 import { App,message } from "antd";
 import { useNavigate } from "react-router-dom";
-import { getCurrentUsername } from "../utils/utils";
+import { getCurrentUsername } from "../Helpers/Helpers";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentUser } from "../Redux/userSlice";
 import { setLoading } from "../Redux/loaderSlice";

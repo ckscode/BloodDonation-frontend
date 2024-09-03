@@ -7,7 +7,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { setLoading } from "../../../Redux/loaderSlice";
 import { message, Modal, Table } from "antd";
-import { getDateFormat } from "../../../utils/utils";
+import { getDateFormat } from "../../../Helpers/Helpers";
 import InventoryTable from "../../../Components/InventoryTable";
 
 const Organisations = ({ userType }) => {

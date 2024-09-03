@@ -4,7 +4,7 @@ import InventoryForm from "./InventoryForm";
 import { useDispatch } from "react-redux";
 import { setLoading } from "../../../Redux/loaderSlice";
 import { getInventory } from "./inventoryApi";
-import { getDateFormat } from "../../../utils/utils";
+import { getDateFormat } from "../../../Helpers/Helpers";
 
 
 const Inventory = () => {

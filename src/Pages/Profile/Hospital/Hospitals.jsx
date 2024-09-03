@@ -3,7 +3,7 @@ import {  getAllHospitalsOfOrg } from '../../../ApiCalls/ApiCalls';
 import { useDispatch } from 'react-redux';
 import { setLoading } from '../../../Redux/loaderSlice';
 import { message, Table } from 'antd';
-import { getDateFormat } from '../../../utils/utils';
+import { getDateFormat } from '../../../Helpers/Helpers';
 
 const Hospitals = () => {
     const [data, setData] = useState([]);
