@@ -6,7 +6,6 @@ import Inventory from './Inventory/Inventory';
 import Donors from './Donor/Donors';
 import Hospitals from './Hospital/Hospitals';
 import Organisations from './Organisation/Organisations';
-import Donations from './Donation/Donations';
 import InventoryTable from '../../Components/InventoryTable';
 import useLogin from '../../ApiCalls/useLogin';
 
