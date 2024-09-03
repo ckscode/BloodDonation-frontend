@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getInventoryWithFilters } from '../Pages/Profile/Inventory/inventoryApi';
 import { Button, message, Table } from "antd";
 import { setLoading } from '../Redux/loaderSlice';
-import { getDateFormat } from '../utils/Utils';
+import { getDateFormat } from '../utils/utils';
 
 const InventoryTable = ({filters,limit,pagination}) => {
   const [data, setData] = useState([]);
