@@ -5,8 +5,7 @@ import { Button, message, Table } from "antd";
 import { setLoading } from '../Redux/loaderSlice';
 import { getDateFormat } from '../utils/Utils';
 
-const InventoryTable = ({filters,limit,pagination,userType}) => {
-    const [open, setOpen] = useState(false);
+const InventoryTable = ({filters,limit,pagination}) => {
   const [data, setData] = useState([]);
   const dispatch = useDispatch();
   const {currentUser} = useSelector((state)=> state.users)

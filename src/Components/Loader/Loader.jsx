@@ -1,12 +1,7 @@
 import React from "react";
 import { LoadingOutlined } from '@ant-design/icons';
 import { Flex, Spin } from 'antd';
-// const contentStyle = {
-//   padding: 50,
-//   background: "rgba(0, 0, 0, 0.2)",
-//   borderRadius: 4,
-// };
-// const content = <div style={contentStyle} />;
+
 
 const Loader = () => {
   return (
