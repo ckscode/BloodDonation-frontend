@@ -41,9 +41,6 @@ const Home = () => {
         <div className='h-screen '>
            {currentUser&&currentUser.userType === 'donor'&&
           <>
-          <div className='w-full mt-3 flex justify-evenly grid grid-cols-4 gap-5'>
-          
-            </div>
 
             <h2 className='mt-4'>Your Recent Donations</h2>
             <InventoryTable
