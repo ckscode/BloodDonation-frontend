@@ -33,10 +33,16 @@ const Register = () => {
     }
     },[])
   return (
-    <div className="flex justify-center items-center h-screen">
-      <Form layout="vertical w-full flex justify-center"
+    <div className="flex justify-center items-center h-screen bg-amber-200">
+        <div className='justify-start items-center me-8'>
+            <p className='text-2xl w-full'>Give The Gift Of Life</p>
+            <h1 className='inline-block text-primary text-5xl blood text-start'>
+              Donate Blood.
+            </h1>
+          </div>
+      <Form layout="vertical  flex justify-center"
       onFinish={onFinish}>
-        <div className="bg-white shadow-md rounded-md p-5 w-1/4">
+        <div className="bg-white shadow-lg rounded-xl p-5 ms-8">
           <h1 className="text-4xl text-primary mb-0 heading">{type}</h1>
           <h2 className="text-gray-900 mb-2">Register</h2>
           <Radio.Group

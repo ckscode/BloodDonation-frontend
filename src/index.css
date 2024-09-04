@@ -19,8 +19,26 @@ textarea{
     min-height:80px !important;
 }
 
+.blood{
+  width:100%;
+  white-space: nowrap; /* Keeps the content on a single line */
+  margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+  border-right:3px solid ;
+  overflow: hidden;
+  animation: typing 2s steps(20), blink .5s step-end infinite alternate;
+}
 
-
+@keyframes typing {
+  from {
+    width: 0
+  }
+}
+    
+@keyframes blink {
+  50% {
+    border-color: transparent
+  }
+}
 
 
 
